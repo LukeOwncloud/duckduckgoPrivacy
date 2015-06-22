@@ -2,8 +2,8 @@
 // @name        Github-+1s
 // @namespace   github
 // @description Remove noisy +1s-comments from Github issues
-// @include     https://github.com/*/issues/*
-// @include     http://github.com/*/issues/*
+// @include     https://github.com/*/issues*
+// @include     http://github.com/*/issues*
 // @version     1
 // @grant       none
 // ==/UserScript==
@@ -94,10 +94,28 @@ function buildVoteIcons() {
   appendGitPollLink();
 }
 
+/*
 var observer = new MutationObserver(function() {
   buildVoteIcons();
 });
 
 observer.observe(document.querySelector('div.js-discussion'), {childList: true});
+*/
+var observer = new MutationObserver(function(mutations) {
+  var needsRemoval = false;
+  mutations.forEach(function(mutation) {
+    Array.prototype.slice.call(mutation.addedNodes).forEach(function(node) {
+      if (node instanceof Element && (node.querySelector(".js-comment") || node.classList.contains("js-comment"))) {
+        needsRemoval = true;
+      }
+    });
+  });
+
+  if (needsRemoval) {
+    buildVoteIcons();
+  }
+});
+
+observer.observe(document, {childList: true, subtree: true});
 
 buildVoteIcons();
