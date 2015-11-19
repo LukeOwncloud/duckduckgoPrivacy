@@ -9,4 +9,5 @@ Remove URL rewrite on clicking search results. [Install.](https://github.com/Luk
 #### github-+1s
 Remove noisy +1 and -1 comments. Instead show list of votes. [Install.](https://github.com/LukeOwncloud/duckduckgoPrivacy/raw/master/github-+1s.user.js)
 
-
+#### googleDirectShopping
+Remove Google tracking for Google shopping. [Install.](https://github.com/LukeOwncloud/duckduckgoPrivacy/raw/master/googleDirectShopping.user.js)
